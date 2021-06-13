@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:highlight_translator_flutter/models/translator.dart';
 import 'package:win32/win32.dart';
 import 'package:ffi/ffi.dart';
 
@@ -22,7 +24,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePage extends State<HomePage> {
   MouseState _lastMouseState = MouseState.pressed;
-  String? _copied;
+  String? _result;
 
   @override
   void initState() {
@@ -32,7 +34,7 @@ class _HomePage extends State<HomePage> {
   }
 
   void _captureMouseEvent() {
-    const Duration captureFrameDuration = Duration(milliseconds: 1);
+    const Duration captureFrameDuration = Duration(milliseconds: 10);
 
     Timer.periodic(captureFrameDuration, (Timer t) {
       _update();
@@ -48,15 +50,25 @@ class _HomePage extends State<HomePage> {
 
       if (mouseState == MouseState.released) {
         _copyToClipboard();
+
+        sleep(const Duration(milliseconds: 10));
+
+        try {
+          ClipboardData? clipboardData =
+              await Clipboard.getData(Clipboard.kTextPlain);
+
+          Translator translator = Translator(
+              source: clipboardData!.text ?? "", targetLang: "zh-TW");
+          await translator.translate();
+
+          setState(() {
+            _result = translator.result ?? "NULL";
+          });
+        } catch (e) {
+          debugPrint(e.toString());
+        }
       }
     }
-
-    ClipboardData? clipboardData =
-        await Clipboard.getData(Clipboard.kTextPlain);
-
-    setState(() {
-      _copied = clipboardData?.text;
-    });
   }
 
   void _copyToClipboard() {
@@ -100,7 +112,7 @@ class _HomePage extends State<HomePage> {
         color: Colors.black,
         child: Center(
           child: Text(
-            _copied ?? "NULL",
+            _result ?? "NULL",
             style: const TextStyle(
               fontSize: 50,
               color: Colors.white,

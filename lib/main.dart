@@ -1,8 +1,10 @@
 import 'dart:io';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:highlight_translator_flutter/views/home_page.dart';
 import 'package:window_size/window_size.dart';
+import 'package:win32/win32.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -11,6 +13,17 @@ void main() {
     setWindowMinSize(const Size(960, 540));
     setWindowMaxSize(Size.infinite);
   }
+
+  CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
+
+  ShellExecute(
+    0,
+    TEXT('open'),
+    TEXT(Directory.current.path + '\\services\\google-translate-backend.exe'),
+    nullptr,
+    nullptr,
+    SW_SHOW,
+  );
 
   runApp(const MyApp());
 }
