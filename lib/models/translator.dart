@@ -21,7 +21,6 @@ class Translator {
       Map<String, dynamic> translator =
           jsonDecode(utf8.decode(response.bodyBytes));
 
-      print(translator["result"]);
       result = translator["result"];
     } catch (e) {
       debugPrint(e.toString());
