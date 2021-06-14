@@ -12,4 +12,4 @@ Highlight Translator only supports Windows 10 right now, there may be a version 
 
 ## Download
 
-Download executable file (.zip) [here]().
+Download executable file (.zip) [here](https://github.com/wst24365888/highlight_translator_flutter/blob/main/release/release.zip).
