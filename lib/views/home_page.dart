@@ -1,17 +1,12 @@
 import 'dart:async';
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:highlight_translator_flutter/models/translator.dart';
-import 'package:win32/win32.dart';
-import 'package:ffi/ffi.dart';
-
-enum MouseState {
-  pressed,
-  released,
-}
+import 'package:highlight_translator_flutter/models/mouse_state.dart';
+import 'package:highlight_translator_flutter/services/copy_to_clipboard.dart';
+import 'package:highlight_translator_flutter/services/get_mouse_state.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -42,14 +37,14 @@ class _HomePage extends State<HomePage> {
   }
 
   void _update() async {
-    final MouseState mouseState = _isMousePressed();
+    final MouseState mouseState = getMouseState();
 
     if (mouseState != _lastMouseState) {
       debugPrint(mouseState.toString());
       _lastMouseState = mouseState;
 
       if (mouseState == MouseState.released) {
-        _copyToClipboard();
+        copyToClipboard();
 
         sleep(const Duration(milliseconds: 10));
 
@@ -69,40 +64,6 @@ class _HomePage extends State<HomePage> {
         }
       }
     }
-  }
-
-  void _copyToClipboard() {
-    // Ctrl+C
-
-    final Pointer<INPUT> kbd = calloc<INPUT>();
-
-    kbd.ref.type = INPUT_KEYBOARD;
-
-    kbd.ki.wVk = 0x11;
-    SendInput(1, kbd, sizeOf<INPUT>());
-
-    kbd.ki.wVk = 0x43;
-    SendInput(1, kbd, sizeOf<INPUT>());
-
-    kbd.ki.wVk = 0x11;
-    kbd.ki.dwFlags = KEYEVENTF_KEYUP;
-    SendInput(1, kbd, sizeOf<INPUT>());
-
-    kbd.ki.wVk = 0x43;
-    kbd.ki.dwFlags = KEYEVENTF_KEYUP;
-    SendInput(1, kbd, sizeOf<INPUT>());
-
-    free(kbd);
-  }
-
-  MouseState _isMousePressed() {
-    final int mouseState = GetKeyState(QS_KEY);
-
-    if (mouseState == 0 || mouseState == 1) {
-      return MouseState.released;
-    }
-
-    return MouseState.pressed;
   }
 
   @override
