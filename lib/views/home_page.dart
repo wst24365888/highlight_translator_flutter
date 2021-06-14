@@ -8,6 +8,7 @@ import 'package:highlight_translator_flutter/models/mouse_state.dart';
 import 'package:highlight_translator_flutter/services/copy_to_clipboard.dart';
 import 'package:highlight_translator_flutter/services/get_mouse_state.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -190,14 +191,29 @@ class _HomePage extends State<HomePage> {
                         ),
                         SizedBox(
                           width: double.infinity,
-                          child: SelectableText(
-                            _translator.result ?? "",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.black,
-                            ),
-                            textAlign: TextAlign.left,
-                          ),
+                          child: (_translator.result?.isEmpty ?? true)
+                              ? Shimmer.fromColors(
+                                  baseColor: Colors.grey[600] ?? Colors.black,
+                                  highlightColor:
+                                      Colors.grey[100] ?? Colors.black,
+                                  enabled: _translator.result?.isEmpty ?? true,
+                                  child: const SelectableText(
+                                    "Loading...",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.black,
+                                    ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                )
+                              : SelectableText(
+                                  _translator.result ?? "",
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                  textAlign: TextAlign.left,
+                                ),
                         ),
                       ],
                     ),

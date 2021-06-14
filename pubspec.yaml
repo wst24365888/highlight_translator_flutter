@@ -55,6 +55,7 @@ dev_dependencies:
   http: ^0.13.3
   linked_scroll_controller: ^0.2.0
   google_fonts: ^2.1.0
+  shimmer: ^2.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
