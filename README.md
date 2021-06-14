@@ -1,16 +1,15 @@
-# highlight_translator_flutter
+# Highlight Translator Flutter
 
-A new Flutter project.
+Highlight Translator is a tool that allows you to quickly translate sentences from any document, in any language, just by highlighting it!
 
-## Getting Started
+## Inspired by
 
-This project is a starting point for a Flutter application.
+- [CoolShanlan's Highlight Translator](https://github.com/Coolshanlan/HighlightTranslator)
 
-A few resources to get you started if this is your first Flutter project:
+## Environment
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Highlight Translator only supports Windows 10 right now, there may be a version for other platforms in the near future.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Download
+
+Download executable file (.zip) [here]().
