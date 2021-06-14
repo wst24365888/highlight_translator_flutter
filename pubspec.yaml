@@ -53,6 +53,8 @@ dev_dependencies:
   win32: ^2.1.5
   ffi: ^1.1.2
   http: ^0.13.3
+  linked_scroll_controller: ^0.2.0
+  google_fonts: ^2.1.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

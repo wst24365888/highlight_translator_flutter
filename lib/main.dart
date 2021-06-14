@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:highlight_translator_flutter/views/home_page.dart';
 import 'package:window_size/window_size.dart';
 import 'package:win32/win32.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +38,9 @@ class MyApp extends StatelessWidget {
       title: 'Highlight Translator',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.montserratTextTheme(
+          Theme.of(context).textTheme,
+        ),
       ),
       home: const HomePage(),
     );
