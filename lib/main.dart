@@ -11,7 +11,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     setWindowTitle("Highlight Translator");
-    setWindowMinSize(const Size(960, 540));
+    setWindowFrame(const Rect.fromLTRB(192.0, 108.0, 960.0, 540.0));
+    setWindowMinSize(const Size(384, 216));
     setWindowMaxSize(Size.infinite);
   }
 
@@ -19,7 +20,7 @@ void main() {
 
   ShellExecute(
     0,
-    TEXT('open'),
+    TEXT('runas'),
     TEXT(Directory.current.path + '\\services\\google-translate-backend.exe'),
     nullptr,
     nullptr,

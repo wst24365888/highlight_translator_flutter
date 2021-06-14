@@ -32,7 +32,6 @@ class _HomePage extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-
     _sourceWidgetScrollController = _controllers.addAndGet();
     _resultWidgetScrollController = _controllers.addAndGet();
 
