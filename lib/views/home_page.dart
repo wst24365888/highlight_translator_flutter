@@ -196,6 +196,7 @@ class _HomePage extends State<HomePage> {
                                   baseColor: Colors.grey[600] ?? Colors.black,
                                   highlightColor:
                                       Colors.grey[100] ?? Colors.black,
+                                  // See: https://github.com/hnvn/flutter_shimmer/issues/47
                                   enabled: _translator.result?.isEmpty ?? true,
                                   child: const SelectableText(
                                     "Loading...",
